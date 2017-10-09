@@ -15,13 +15,20 @@ class Point:
     def distanceFromOrigin(self):
         return ((self.x ** 2) + (self.y ** 2)) ** 0.5
 
-    def findEquation(self):
-        run = (7 - Point.getX)
-        rise = (6 - Point.getY)
-        slope = rise / run
-        y-intercept =
-        equation = "y = ", slope, "x + ", y-intercept, " with the points (7, 6) and ", p)
-        print(equation)
+    def findEquation(self, punto):
+        x = self.getX()
+        xx = punto.getX()
+        y = self.getY()
+        yy = punto.getY()
+        slope = (x - xx) / (y - yy)
+#        multiply = slope(x)
+#        subtract = multiply - y
+#        y_intercept = subtract
+        b = y - x*y
+        t = (slope, b)
+        equation = print("y =", slope, "x +", t)
         return equation
 
-p2 = Point(6, 8)
+p = Point(7, 6)
+pp = Point(6, 8)
+p.findEquation(pp)
