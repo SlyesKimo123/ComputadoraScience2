@@ -43,8 +43,10 @@ class Point:
         y = self.getY()
         yy = punto.getY()
         yyy = punto_dos.getY()
-        radius = (math.fabs(x) + math.fabs(xx))/2
-        print(radius)
+        xdist = (math.fabs(x) + math.fabs(xx))
+        ydist = (math.fabs(y) + math.fabs(yy))
+        secret_formular = math.sqrt((xdist ** 2) + (ydist ** 2))
+        print(secret_formular)
 
 p = Point(2, 0)
 pp = Point(-2, 0)

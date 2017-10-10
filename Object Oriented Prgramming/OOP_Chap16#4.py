@@ -20,15 +20,11 @@ class Point:
         xx = punto.getX()
         y = self.getY()
         yy = punto.getY()
-        slope = (x - xx) / (y - yy)
-#        multiply = slope(x)
-#        subtract = multiply - y
-#        y_intercept = subtract
-        b = y - x*y
-        t = (slope, b)
-        equation = print("y =", slope, "x +", t)
+        slope = int((x - xx) / (y - yy))
+        y_intercept = int(self.y - slope * self.x)
+        equation = print("y =", slope, "x +", y_intercept)
         return equation
 
-p = Point(7, 6)
-pp = Point(6, 8)
+p = Point(4, 5)
+pp = Point(6, 7)
 p.findEquation(pp)
