@@ -36,6 +36,13 @@ class Point:
     def __str__(self):
         return str(self.x) + ", " + str(self.y)
 
+    def halfway(self, target):
+         mx = (self.x + target.x) / 2
+         my = (self.y + target.y) / 2
+         return Point(my, mx)
+
+    # Ignore this below function.  Working on a new one, but this is the one I was trying for HW
+
     def circle(self, punto, punto_dos):
         x = self.getX()
         xx = punto.getX()
@@ -48,8 +55,12 @@ class Point:
         secret_formular = math.sqrt((xdist ** 2) + (ydist ** 2))
         print(secret_formular)
 
-p = Point(2, 0)
-pp = Point(-2, 0)
-ppp = Point(0, 2)
+
+
+
+
+p = Point(math.sqrt(2), math.sqrt(2))
+pp = Point(math.sqrt(1), math.sqrt(3))
+ppp = Point(1, 0)
 
 p.circle(pp, ppp)
