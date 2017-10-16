@@ -22,7 +22,7 @@ class Point:
         y = self.getY()
         yy = punto.getY()
         slope = (x - xx) / (y - yy)
-        multiply = slope(x)
+        multiply = slope * x
         subtract = multiply - y
         y_intercept = subtract
         equation = print("y =", slope, "x +", y_intercept)
@@ -41,9 +41,16 @@ class Point:
          my = (self.y + target.y) / 2
          return Point(my, mx)
 
+    def dist_between(self, other_punto):
+        XDiff = other_punto.getX() - self.getX()
+        YDiff = other_punto.getY() - self.getY()
+        distance = math.sqrt(XDiff**2 + YDiff**2)
+        print("The distance between is ", distance, "units.")
+        return distance
+
     # Ignore this below function.  Working on a new one, but this is the one I was trying for HW
 
-    def circle(self, punto, punto_dos):
+    def circle_fail(self, punto, punto_dos):
         x = self.getX()
         xx = punto.getX()
         xxx = punto_dos.getX()
@@ -53,14 +60,26 @@ class Point:
         xdist = (math.fabs(x) + math.fabs(xx))
         ydist = (math.fabs(y) + math.fabs(yy))
         secret_formular = math.sqrt((xdist ** 2) + (ydist ** 2))
-        print(secret_formular)
+        theanswer = print(secret_formular)
+        return theanswer
 
+    def circle(self, p2, p3):
+        l = self.dist_between(p2)
+        l2 = self.dist_between(p3)
+        l3 = p2.dist_between(p3)
+        midpoint_punto = self.halfway(p3)
+        height = p2.dist_between(midpoint_punto)
+        area = (l2 * height) / 2
+        radius = (l * l2 * l3) / (4 * area)
+        return radius
 
+#p = Point(math.sqrt(2), math.sqrt(2))
+#pp = Point(math.sqrt(3), math.sqrt(1))
+#ppp = Point(0, 2)
 
+p = Point(2, 0)
+pp = Point(-2, 0)
+ppp = Point(0, 2)
 
-
-p = Point(math.sqrt(2), math.sqrt(2))
-pp = Point(math.sqrt(1), math.sqrt(3))
-ppp = Point(1, 0)
-
-p.circle(pp, ppp)
+circle_radius = p.circle(pp, ppp)
+print(circle_radius)
