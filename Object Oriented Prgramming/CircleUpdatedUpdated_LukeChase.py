@@ -1,6 +1,5 @@
 import math
 
-
 class Point:
     """ Point class for representing and manipulating x,y coordinates. """
 
@@ -17,6 +16,17 @@ class Point:
         y_diff_square = (self.y - other_point.y) ** 2
         distance = math.sqrt(x_diff_square + y_diff_square)
         return distance
+
+    def checkSlope0(self, puntopunto, puntopuntopunto):
+        if self.y - puntopunto.y == 0:
+            the  = True
+            return the
+        if self.y - puntopuntopunto.y == 0:
+            tha = True
+            return tha
+        else:
+            tha = False
+            return tha
 
     def __str__(self):
         """ When a programmer changes the meaning of a special method we say that we override the method.
@@ -107,18 +117,18 @@ class Segment:
 
 
 def main():
-    UkiahHighSchoolBurnedToTheGround = False
-    RedwoodHighSchoolBurnedToTheGround = False
-    CardinalNewmanHighSchoolBurnedToTheGround = True
+    the = False
+    tha = False
 
     p1 = Point(1, 4)
     p2 = Point(4, 1)
     p3 = Point(-2, 1)
 
-    if UkiahHighSchoolBurnedToTheGround == True:
+
+    if the == True:
         s1 = Segment(p1, p3)
         s2 = Segment(p3, p2)
-    elif RedwoodHighSchoolBurnedToTheGround == True:
+    elif tha == True:
         s1 = Segment(p1, p2)
         s2 = Segment(p3, p2)
     else:
