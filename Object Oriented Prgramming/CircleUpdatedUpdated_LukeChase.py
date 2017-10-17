@@ -17,16 +17,13 @@ class Point:
         distance = math.sqrt(x_diff_square + y_diff_square)
         return distance
 
-    def checkSlope0(self, puntopunto, puntopuntopunto):
-        if self.y - puntopunto.y == 0:
-            the  = True
-            return the
-        if self.y - puntopuntopunto.y == 0:
-            tha = True
-            return tha
-        else:
-            tha = False
-            return tha
+    def checkSlope0(self, puntodos, puntotres):
+        if self.x == puntodos.x:
+            Error1 = True
+            return Error1
+        if self.x == puntotres.x:
+            Error2 = True
+            return Error2
 
     def __str__(self):
         """ When a programmer changes the meaning of a special method we say that we override the method.
@@ -117,26 +114,30 @@ class Segment:
 
 
 def main():
-    the = False
-    tha = False
+    Error1 = False
+    Error2 = False
 
-    p1 = Point(1, 4)
-    p2 = Point(4, 1)
-    p3 = Point(-2, 1)
+    p1 = Point(2, 0)
+    p2 = Point(0, 2)
+    p3 = Point(2, 4)
 
+    p1.checkSlope0(p2, p3)
 
-    if the == True:
+    if Error1 == True:
         s1 = Segment(p1, p3)
         s2 = Segment(p3, p2)
-    elif tha == True:
+        lp1 = s1.bisect()
+        lp2 = s2.bisect()
+    elif Error2 == True:
         s1 = Segment(p1, p2)
         s2 = Segment(p3, p2)
+        lp1 = s1.bisect()
+        lp2 = s2.bisect()
     else:
         s1 = Segment(p1, p2)
         s2 = Segment(p3, p1)
-
-    lp1 = s1.bisect()
-    lp2 = s2.bisect()
+        lp1 = s1.bisect()
+        lp2 = s2.bisect()
 
     center = lp1.intersect(lp2)
     # See "Equation of a Circle from 3 Points (2 dimensions)"
