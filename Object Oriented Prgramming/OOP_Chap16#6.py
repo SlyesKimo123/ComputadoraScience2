@@ -22,9 +22,7 @@ class Point:
         y = self.getY()
         yy = punto.getY()
         slope = (x - xx) / (y - yy)
-        multiply = slope * x
-        subtract = multiply - y
-        y_intercept = subtract
+        y_intercept = (self.y - (m * self.x))
         equation = print("y =", slope, "x +", y_intercept)
         return equation
 
@@ -82,4 +80,4 @@ pp = Point(-2, 0)
 ppp = Point(0, 2)
 
 circle_radius = p.circle(pp, ppp)
-print(circle_radius)
+print("Radius: ", circle_radius)
