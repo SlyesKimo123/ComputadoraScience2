@@ -1,6 +1,4 @@
-
 class Student:
-
     def __init__(self, name, hours, qpoints):
         self.name = name
         self.hours = float(hours)
@@ -15,12 +13,30 @@ class Student:
     def getQPoints(self):
         return self.qpoints
 
-    def GPA(self):
-        return self.qpoints / self.hours
+    def gpa(self):
+        return self.qpoints/self.hours
 
 def makeStudent(infoStr):
-    name, hours, qpoints = infoStr.split("\t")
+    name, hours, qpoints = infoStr.split()
     return Student(name, hours, qpoints)
 
 def main():
-    filename = input("Get student name: ")
+    filename = input("Enter the name of the grade file: ")
+    infile = open(filename, 'r')
+
+    best = makeStudent(infile.readline())
+
+    for line in infile:
+        s = makeStudent(line)
+
+        if s.gpa() > best.gpa():
+            best = s
+
+    infile.close()
+
+    print("The best student is:", best.getName())
+    print("Hours:", best.getHours())
+    print("GPA:", best.gpa())
+
+if __name__ == '__main__':
+    main()

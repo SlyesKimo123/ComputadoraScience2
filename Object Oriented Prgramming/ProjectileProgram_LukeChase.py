@@ -14,6 +14,12 @@ class Projectile:
         yvel1 = self.yvel - time * 9.8
         self.ypos = self.ypos + time * (self.yvel + yvel1) / 2
         self.yvel = yvel1
+        print("yvel = ", yvel1)
+        return self.yvel
+
+    def calcLine(self, height):
+        eq = (self.yvel * (self.xpos ** 2)) + height
+        return eq
 
     def getX(self):
         return self.xpos
@@ -36,3 +42,7 @@ def main():
     print("\nDistance travelled: {0:0.1f} meters.".format(p.getX()))
 
 main()
+
+# 21
+
+while p.getY() >= 0:
