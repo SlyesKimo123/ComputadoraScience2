@@ -10,12 +10,15 @@ class Projectile:
         self.yvel = velocity * math.sin(theta)
 
     def update(self, time):
+        l = []
         self.xpos = self.xpos + time * self.xvel
         yvel1 = self.yvel - time * 9.8
         self.ypos = self.ypos + time * (self.yvel + yvel1) / 2
         self.yvel = yvel1
+        l = l.append(yvel1)
+        print(max(l))
         print("yvel = ", yvel1)
-        return self.yvel
+        return self.yvel, yvel1
 
     def calcLine(self, height):
         eq = (self.yvel * (self.xpos ** 2)) + height
@@ -31,7 +34,8 @@ def getInputs():
     angle = eval(input("Enter the launch angle por favor (in degrees): \n"))
     velocity = eval(input("Enter the velocity monguir (in meters/second): \n"))
     height0 = eval(input("Enter the initial height pongü (in meters) \n"))
-    time = eval(input("Enter time interval between calculations if you may: \n"))
+    time = 0.1
+#    time = eval(input("Enter time interval between calculations if you may: \n"))
     return angle, velocity, height0, time
 
 def main():
@@ -42,7 +46,3 @@ def main():
     print("\nDistance travelled: {0:0.1f} meters.".format(p.getX()))
 
 main()
-
-# 21
-
-while p.getY() >= 0:
