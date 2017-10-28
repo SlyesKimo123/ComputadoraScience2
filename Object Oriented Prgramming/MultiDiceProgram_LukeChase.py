@@ -15,7 +15,7 @@ class MSDie:
     def setValue(self, value):
         self.value = value
 
-def main():
+def main():w
     d = MSDie(12)
     d.setValue(8)
     print(d.getValue())

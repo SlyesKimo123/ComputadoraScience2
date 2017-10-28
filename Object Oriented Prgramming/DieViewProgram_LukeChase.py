@@ -11,10 +11,10 @@ class DieView:
 
         self.win = win
         self.background = "white"
-        self.foregroud = "black"
+        self.foreground = "black"
         self.psize = 0.1 * size
         hsize = size / 2.0
-        offset = 0.6 * hsize
+        offset = .6 * hsize
 
         cx, cy = center.getX(), center.getY()
         p1 = Point(cx-hsize, cy-hsize)
@@ -51,29 +51,29 @@ class DieView:
         self.pip7.setFill(self.background)
 
         if value == 1:
-            self.pip4.setFill(self.foregroud)
+            self.pip4.setFill(self.foreground)
         elif value == 2:
-            self.pip1.setFill(self.foregroud)
-            self.pip7.setFill(self.foregroud)
+            self.pip1.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
         elif value == 3:
-            self.pip1.setFill(self.foregroud)
-            self.pip7.setFill(self.foregroud)
-            self.pip4.setFill(self.foregroud)
+            self.pip1.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
+            self.pip4.setFill(self.foreground)
         elif value == 4:
-            self.pip1.setFill(self.foregroud)
-            self.pip3.setFill(self.foregroud)
-            self.pip5.setFill(self.foregroud)
-            self.pip7.setFill(self.foregroud)
+            self.pip1.setFill(self.foreground)
+            self.pip3.setFill(self.foreground)
+            self.pip5.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
         elif value == 5:
-            self.pip1.setFill(self.foregroud)
-            self.pip3.setFill(self.foregroud)
-            self.pip4.setFill(self.foregroud)
-            self.pip5.setFill(self.foregroud)
-            self.pip7.setFill(self.foregroud)
+            self.pip1.setFill(self.foreground)
+            self.pip3.setFill(self.foreground)
+            self.pip4.setFill(self.foreground)
+            self.pip5.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
         else:
-            self.pip1.setFill(self.foregroud)
-            self.pip2.setFill(self.foregroud)
-            self.pip3.setFill(self.foregroud)
-            self.pip5.setFill(self.foregroud)
-            self.pip6.setFill(self.foregroud)
-            self.pip7.setFill(self.foregroud)
+            self.pip1.setFill(self.foreground)
+            self.pip2.setFill(self.foreground)
+            self.pip3.setFill(self.foreground)
+            self.pip5.setFill(self.foreground)
+            self.pip6.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)

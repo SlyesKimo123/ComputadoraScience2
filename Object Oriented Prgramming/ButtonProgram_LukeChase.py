@@ -4,19 +4,20 @@ from graphics import *
 
 class Button:
 
-    def __init__(self, win, center, width, height, label):
-        w,h = width/2.0, height/2.3
+    def __init__(self, win, center, radius, label):
+        r = radius
         x,y = center.getX(), center.getY()
 
-        self.xmax, self.xmin = x+w, x-w
-        self.ymax, self.ymin = y+h, y-h
+        self.xmax, self.xmin = x+r, x-r
+        self.ymax, self.ymin = y+r, y-r
 
-        p1 = Point(self.xmin, self.ymin)
-        p2 = Point(self.xmax, self.ymax)
+#        p1 = Point(self.xmin, self.ymin)
+#        p2 = Point(self.xmax, self.ymax)
 
-        self.rect = Rectangle(p1, p2)
-        self.rect.setFill('lightgray')
-        self.rect.draw(win)
+#        self.rect = Rectangle(p1, p2)
+        self.circle = Circle(center, r)
+        self.circle.setFill('lightgray')
+        self.circle.draw(win)
 
         self.label = Text(center, label)
         self.label.draw(win)
@@ -33,10 +34,10 @@ class Button:
 
     def activate(self):
         self.label.setFill('black')
-        self.rect.setWidth(2)
+        self.circle.setWidth(2)
         self.active = True
 
     def deactivate(self):
         self.label.setFill('darkgrey')
-        self.rect.setWidth(1)
+        self.circle.setWidth(1)
         self.active = False
