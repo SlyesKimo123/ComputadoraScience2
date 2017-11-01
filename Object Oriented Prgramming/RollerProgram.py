@@ -4,7 +4,7 @@ from random import randrange
 from graphics import GraphWin, Point
 
 from ButtonProgram_LukeChase import Button
-from DieViewProgram_LukeChase import DieView
+from DieViewList import DieView
 
 def main():
     win = GraphWin("Dice Roller")
