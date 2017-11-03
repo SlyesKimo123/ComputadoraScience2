@@ -13,7 +13,7 @@ class Player:
 
     def winsServe(self):
         # RETURNS a Boolean that is true with probability self.prob
-        return random() <= self.prob
+        return random() <= float(self.prob)
 
     def incScore(self):
         # Add a point to this player’s score
