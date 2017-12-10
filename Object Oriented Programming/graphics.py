@@ -304,7 +304,7 @@ class GraphWin(tk.Canvas):
         """Update drawing to the window"""
         self.__checkOpen()
         self.update_idletasks()
-        
+    
     def getMouse(self):
         """Wait for mouse click and return Point object representing
         the click"""
@@ -924,6 +924,16 @@ class Image(GraphicsObject):
         """Returns the height of the image in pixels"""
         return self.img.height()
 
+#    def rotate_right(self, degrees):
+#        """ Rotates an image the inputted number of degrees to the right """
+#        int(degrees)
+#        for i in range(degrees):
+
+
+#    def rotate_left(self):
+#        """ Rotates an image the inputted number of degrees to the right """
+
+
     def getPixel(self, x, y):
         """Returns a list [r,g,b] with the RGB color values for pixel (x,y)
         r,g,b are in range(256)
@@ -955,7 +965,7 @@ class Image(GraphicsObject):
         ext = name.split(".")[-1]
         self.img.write( filename, format=ext)
 
-        
+
 def color_rgb(r,g,b):
     """r,g,b are intensities of red, green, and blue in range(256)
     Returns color specifier string for the resulting color"""

@@ -15,7 +15,7 @@ def main():
     die2 = DieView(win, Point(7,7), 2)
 
     rollButton = Button(win, Point(5, 3.7), 1.5, "Roll Dice")
-    rollButton.activate()
+    rollButton.active()
     quitButton = Button(win, Point(5, 1), 1, "Quit")
 
     pt = win.getMouse()
@@ -27,7 +27,7 @@ def main():
             value2 = randrange(0, 9)
             die2.setValue(value2)
 
-            quitButton.activate()
+            quitButton.active()
         pt = win.getMouse()
     win.close()
 
