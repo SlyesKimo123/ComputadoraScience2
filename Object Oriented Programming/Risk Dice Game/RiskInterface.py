@@ -32,13 +32,13 @@ class RiskInterface:
         intro.setSize(12)
         intro.draw(self.win)
         self.equal = Text(Point(100, 100), "The numbers were equal! Roll again.")
-        self.equal.setSize(14)
+        self.equal.setSize(12)
         self.equal.draw(self.win)
         self.correct = Text(Point(100, 120), "You are correct!  You get a punto!")
-        self.correct.setSize(14)
+        self.correct.setSize(12)
         self.correct.draw(self.win)
         self.wrong = Text(Point(100, 140), "You guessed wrong!  Game Over!")
-        self.wrong.setSize(14)
+        self.wrong.setSize(12)
         self.wrong.draw(self.win)
         self.text_hidden()
         self.num = Text(Point(300, 170), " ")
@@ -65,7 +65,7 @@ class RiskInterface:
         self.points.draw(self.win)
 
     def createDice(self, center, size):
-        """Creates the two dice and their position"""
+        """ Creates the two dice and their position """
         center.move(-3*size,0)
         self.dice = []
         for i in range(2):
@@ -73,11 +73,23 @@ class RiskInterface:
             self.dice.append(view)
             center.move(1.5*size,0)
 
+    def rectangles(self):
+        """ Draws two rectangles over the dice to hide the values of the dice
+            until the user's guess has been made """
+        self.rectangle = Rectangle(Point(205, 70), Point(280, 130))
+        self.rectangle.setFill("red")
+        self.rectangle.draw(self.win)
+
+        self.rectangle2 = Rectangle(Point(318, 70), Point(393, 130))
+        self.rectangle2.setFill("red")
+        self.rectangle2.draw(self.win)
+
     def gen_text(self, num):
-        """Creates the text of the generated number for the start of the round"""
+        """ Creates the text of the generated number for the start of the round """
         self.num.setText("The number is {0}.".format(num))
 
     def theScore(self, amount):
+        """ Creates the text of the score in the upper left corner """
         self.points.setText("Score: {0}".format(amount))
 
     def hide(self, text):
@@ -148,39 +160,31 @@ class RiskInterface:
                 if b.clicked(p):
                     return b
 
-    def puntos(self, puntos):
-        """ Returns the integer number of points after one has been added
-            for the user completing a round (by guessing correctly) """
-        puntos += 1
-        return int(puntos)
-
-    def check(self, values, score, gnum):
+    def check(self, values, gnum):
         """ Checks to see if the user's guess was correct and shows the result.
             Window closes if wrong and starts the next round if correct """
         b = self.clicked(self.higher_b), self.clicked(self.lower_b)
         for i in b:
             if i.getLabel() == "Higher":
                 if gnum < values:
-                    self.show(self.correct)
+                    self.show(self.correct) # user's guess is correct
                     return True
-                elif gnum == values:
+                elif gnum == values: # values are equal
                     self.show(self.equal)
                 else:
-                    self.show(self.wrong)
+                    self.show(self.wrong) # user's guess is wrong
                     time.sleep(1)
                     self.close()
             elif i.getLabel() == "Lower":
                 if gnum > values:
-                    self.show(self.correct)
+                    self.show(self.correct) # user's guess is correct
                     return True
-                elif gnum == values:
+                elif gnum == values: # values are equal
                     self.show(self.equal)
                 else:
-                    self.show(self.wrong)
+                    self.show(self.wrong) # user's guess is wrong
                     time.sleep(1)
                     self.close()
-#            elif i.getLabel() == "Higher" or i.getLabel() == "Lower"and gnum == values:
-#                    self.show(self.equal)
 
 # Defines interface and riskApp.  Calls both classes to begin the program
 inter = RiskInterface()

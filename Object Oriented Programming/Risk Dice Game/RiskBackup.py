@@ -18,7 +18,7 @@ class Dice:
     """ Creates the functionality of the dice """
 
     def __init__(self):
-        self.dice = [0]*5
+        self.dice = [0]*2
         self.rollAll()
 
     def roll(self, which):
@@ -39,6 +39,7 @@ class Dice:
     def total(self):
         """ Returns the sum of the dice values """
         total = self.values()
+        print(total)
         return int(total[0]) + int(total[1])
 
 class RiskApp:
@@ -83,14 +84,18 @@ class RiskApp:
         self.interface.gen_text(gen_number) # first action is the computer generating rand. num
         self.interface.theScore(self.score) # sets the score to its new value
                                             # (if previous round completed)
-        self.h_or_l()                       # Activates H and L buttons
+        self.h_or_l()    # Activates H and L buttons
+        self.interface.rectangles() # draws the two rectangles before dice roll
+        self.doRolls() # does rolls BEFORE guess has been made
+
         diceroll = self.dice.total()
-        check = self.interface.check(diceroll, self.interface.puntos(self.score), gen_number)
+        check = self.interface.check(diceroll, gen_number)
         # The line above is the meaty method that checks to see if the user's guess is correct
         # and returns True if correct.  If incorrect, window closes and game is over
         if check == True: # Checks to see if the user's guess was correct
             self.score += 1 # If so, a point is added to the score
-        self.doRolls() # does rolls AFTER guess has been made
+        self.interface.rectangle.undraw()
+        self.interface.rectangle2.undraw()
 
     def doRolls(self):
         """ Rolls all the dice and returns the values of the dice """
