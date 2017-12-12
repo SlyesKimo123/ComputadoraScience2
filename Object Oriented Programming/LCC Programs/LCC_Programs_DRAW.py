@@ -1,5 +1,5 @@
 
-from graphics import *
+from graphicscopy import *
 import pyautogui
 
 class Pen:

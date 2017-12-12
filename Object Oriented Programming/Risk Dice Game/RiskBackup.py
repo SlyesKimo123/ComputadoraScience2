@@ -39,7 +39,7 @@ class Dice:
     def total(self):
         """ Returns the sum of the dice values """
         total = self.values()
-        return total[0] + total[1]
+        return int(total[0]) + int(total[1])
 
 class RiskApp:
     """ The behind-the-scenes non-graphics related aspects of Risk Dice game """
@@ -52,7 +52,7 @@ class RiskApp:
     def generate(self):
         """ Returns a generated number for the computer between 3 and 11 """
         self.gnum = randrange(3, 12)
-        return self.gnum
+        return  int(self.gnum)
 
     def h_or_l(self):
         """ Activates the 'Higher' and 'Lower' buttons (previously were not active)
@@ -79,17 +79,18 @@ class RiskApp:
         """ Plays the round.  This series of methods that are being called here are
             what make up one round, from the first to the last task that needs completion """
         self.interface.text_hidden() # fist thing that needs to be done is hiding the result texts
-        self.interface.gen_text(self.generate()) # first action is the computer generating rand. num
+        gen_number = self.generate()
+        self.interface.gen_text(gen_number) # first action is the computer generating rand. num
         self.interface.theScore(self.score) # sets the score to its new value
                                             # (if previous round completed)
         self.h_or_l()                       # Activates H and L buttons
-#        buttons = [self.interface.higher_b, self.interface.lower_b]
-#        b = self.interface.clicked(buttons)
-        self.interface.check(self.dice.total, self.interface.puntos(self.score), self.gnum)
+        diceroll = self.dice.total()
+        check = self.interface.check(diceroll, self.interface.puntos(self.score), gen_number)
         # The line above is the meaty method that checks to see if the user's guess is correct
-        # and carries out actions based on if the guess was correct or incorrect
+        # and returns True if correct.  If incorrect, window closes and game is over
+        if check == True: # Checks to see if the user's guess was correct
+            self.score += 1 # If so, a point is added to the score
         self.doRolls() # does rolls AFTER guess has been made
-#        self.previousScore()
 
     def doRolls(self):
         """ Rolls all the dice and returns the values of the dice """

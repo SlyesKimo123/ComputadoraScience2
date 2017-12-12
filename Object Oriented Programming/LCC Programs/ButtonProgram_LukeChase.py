@@ -31,7 +31,7 @@ class Button:
 
     def clicked(self, p):
         "Returns true if button active and p is inside"
-        return (#self.active and
+        return (self.active and
                 self.xmin <= p.getX() <= self.xmax and
                 self.ymin <= p.getY() <= self.ymax)
 

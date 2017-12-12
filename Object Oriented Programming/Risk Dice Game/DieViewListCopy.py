@@ -7,8 +7,7 @@ The list created near the beginning for each pip necessary can be called later o
 is the same thing as defining several different pips."""
 
 from graphics import *
-from random import randrange
-from ButtonProgram_LukeChase import Button
+from ButtonProgramCOPY import Button
 
 from graphics import *
 

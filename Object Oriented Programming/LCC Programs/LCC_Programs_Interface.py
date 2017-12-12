@@ -5,7 +5,7 @@
 # import statements
 from ButtonProgram_LukeChase import Button
 #from LCC_Programs_DRAW import Pen
-from graphics import *
+from graphicscopy import *
 
 class LCC_Graphics:
     """" This class has all the methods for the drawing program """

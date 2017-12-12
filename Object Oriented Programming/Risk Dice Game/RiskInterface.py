@@ -6,12 +6,13 @@
 #                            #
 ##############################
 
-"""The aim of this project is to create a unique dice game using classes."""
+""" The aim of this project is to create a unique dice game using classes.
+    Risk Dice Game is a 100% original game. """
 
 import time
 from graphics import *
 from RiskBackup import ColorDieView, RiskApp, Dice
-from ButtonProgram_LukeChase import Button
+from ButtonProgramCOPY import Button
 
 class RiskInterface:
     """" Graphics-related methods of Risk dice game """
@@ -30,13 +31,13 @@ class RiskInterface:
                 "then the player gets a point.  If the player guesses wrong then the game is over.\n" )
         intro.setSize(12)
         intro.draw(self.win)
-        self.equal = Text(Point(50, 100), "The numbers were equal! Roll again.")
+        self.equal = Text(Point(100, 100), "The numbers were equal! Roll again.")
         self.equal.setSize(14)
         self.equal.draw(self.win)
-        self.correct = Text(Point(50, 100), "You are correct!  You get a punto!")
+        self.correct = Text(Point(100, 120), "You are correct!  You get a punto!")
         self.correct.setSize(14)
         self.correct.draw(self.win)
-        self.wrong = Text(Point(50, 100), "You guessed wrong!  Game Over!")
+        self.wrong = Text(Point(100, 140), "You guessed wrong!  Game Over!")
         self.wrong.setSize(14)
         self.wrong.draw(self.win)
         self.text_hidden()
@@ -59,7 +60,7 @@ class RiskInterface:
         self.buttons.append(self.lower_b)
         self.quit_b = Button(self.win, Point(570, 20), 40, 30, "Quit")
         self.buttons.append(self.quit_b)
-        self.points = Text(Point(50, 100), "Score: 0")
+        self.points = Text(Point(50, 50), "Score: 0")
         self.points.setSize(18)
         self.points.draw(self.win)
 
@@ -156,29 +157,30 @@ class RiskInterface:
     def check(self, values, score, gnum):
         """ Checks to see if the user's guess was correct and shows the result.
             Window closes if wrong and starts the next round if correct """
-        a, c = self.clicked(self.higher_b), self.clicked(self.lower_b)
-        b = [a, c]
+        b = self.clicked(self.higher_b), self.clicked(self.lower_b)
         for i in b:
             if i.getLabel() == "Higher":
-                if int(gnum) < int(values):
+                if gnum < values:
                     self.show(self.correct)
-                    self.puntos(score)
-                elif gnum == values:
-                    self.show(self.equal)
-                else:
-                    self.wrong.show()
-                    time.sleep(4)
-                    self.close()
-            elif i.getLabel() == "Lower":
-                if int(gnum) > int(values):
-                    self.show(self.correct)
-                    self.puntos(score)
+                    return True
                 elif gnum == values:
                     self.show(self.equal)
                 else:
                     self.show(self.wrong)
-                    time.sleep(4)
+                    time.sleep(1)
                     self.close()
+            elif i.getLabel() == "Lower":
+                if gnum > values:
+                    self.show(self.correct)
+                    return True
+                elif gnum == values:
+                    self.show(self.equal)
+                else:
+                    self.show(self.wrong)
+                    time.sleep(1)
+                    self.close()
+#            elif i.getLabel() == "Higher" or i.getLabel() == "Lower"and gnum == values:
+#                    self.show(self.equal)
 
 # Defines interface and riskApp.  Calls both classes to begin the program
 inter = RiskInterface()
