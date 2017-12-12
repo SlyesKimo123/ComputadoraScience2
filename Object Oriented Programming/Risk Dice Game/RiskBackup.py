@@ -39,7 +39,6 @@ class Dice:
     def total(self):
         """ Returns the sum of the dice values """
         total = self.values()
-        print(total)
         return int(total[0]) + int(total[1])
 
 class RiskApp:
