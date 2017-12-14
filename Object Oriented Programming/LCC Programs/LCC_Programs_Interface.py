@@ -6,7 +6,7 @@
 from ButtonProgram_LukeChase import Button
 from LCC_Programs_DRAW import Pen
 from graphics import *
-from tkinter import *
+# from tkinter import *
 
 class LCC_Graphics:
     """" This class has all the methods for the drawing program """
@@ -109,23 +109,23 @@ class LCC_Graphics:
                                       "{0}".format(self.doc_name_text.getText()))
         if self.clicked(self.doc_name_button):
 
-            self.popup_win = Tk() #self.createWindow(100, 100)
-            self.popup_win.geometry(100 x 100 + 0 + 0)
+            self.popup_win = self.createWindow(100, 100) # Tk()
+#            self.popup_win.geometry(100 x 100 + 0 + 0)
 
             self.popup_button = Button(self.popup_win,
-                                       Point(50, 75), 40, 30,
+                                       Point(75, 75), 40, 30,
                                        "Title: ")
             self.done_button = Button(self.popup_win, Point(75, 10),
                                       30, 20, "Done")
             while True:
+#                self.doc_name = Text("Document Title".format())#Tk input here))
+#                self.doc_name_text.setText("{0}".format(self.doc_name))
                 if self.clicked(self.popup_button):
                     self.popup_button.setText(" ")
-                if self.clicked(self.done_button):
+                elif self.clicked(self.done_button):
                     self.popup_win.close()
-                    return
-            self.doc_name = Text("Document Title".format)
-            self.doc_name = input("Title Here: ")
-            self.doc_name_text.setText("{0}".format(self.doc_name))
+#            self.doc_name = input("Title Here: ")
+
 
     def appearance(self):
         """ This method draws a bunch of shapes to make the document more
