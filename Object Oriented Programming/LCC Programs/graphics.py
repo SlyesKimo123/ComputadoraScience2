@@ -321,8 +321,8 @@ class GraphWin(tk.Canvas):
         return Point(x,y)
 
     def checkMouse(self):
-        """Return last mouse click or None if mouse has
-        not been clicked since last call"""
+        """ Return last mouse click or None if mouse has
+        not been clicked since last call """
         if self.isClosed():
             raise GraphicsError("checkMouse in closed window")
         self.update()
@@ -330,7 +330,7 @@ class GraphWin(tk.Canvas):
             x,y = self.toWorld(self.mouseX, self.mouseY)
             self.mouseX = None
             self.mouseY = None
-            return Point(x,y)
+            return Point(x,y) # returns POINT
         else:
             return None
 

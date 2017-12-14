@@ -6,17 +6,18 @@
 from ButtonProgram_LukeChase import Button
 from LCC_Programs_DRAW import Pen
 from graphics import *
+from tkinter import *
 
 class LCC_Graphics:
     """" This class has all the methods for the drawing program """
 
     def __init__(self):
-        self.COimageICON = Image(Point(100, 50),
+        self.icon = Image(Point(100, 50),
                                  "~/Documents/Computadora Science II/"
                                  "ComputadoraScience2/Object Oriented Programming/"
                                  "LCC Programs/LCC_Icon.gif")
                                 # loads the LCC Programs logo
-        self.pen = Pen(2, 3)
+        self.pen = Pen(2)
 
     def createWindow(self, x, y):
         """ Creates the window of the program and allows for parameters
@@ -30,6 +31,7 @@ class LCC_Graphics:
             returns True. If so, the program starts and if not, the window closes"""
         self.startup()
         if self.createDocumentario() == True:
+            self.start_window.close()
             self.startProgram()
         self.close()
 
@@ -47,10 +49,11 @@ class LCC_Graphics:
     def startup(self):
         """ Creates the startup window and draws LCC Programs Logo,
             checks if the 'Cancel' button is clicked """
-        self.createWindow(200, 300) # calls from createWindow method to set window size
-        self.window.setBackground("black") # sets window BG color
+        self.start_window = self.createWindow(200, 300)
+        # (Above) calls from createWindow method to set window size
+        self.start_window.setBackground("black") # sets window BG color
 
-        self.COimageICON.draw(self.window)
+        self.icon.draw(self.start_window)
 
     def createDocumentario(self):
         ans = self.choose(self.window, self.startup_buttons())
@@ -59,11 +62,11 @@ class LCC_Graphics:
     def startProgram(self):
         self.createWindow(1000, 1000)
         self.window.setBackground("white")
-        self.doc_nombre()
         self.appearance()
         self.actionButtons()
-        self.pen.draw(self.window)
         while True:
+            self.pen.draw(self.window)
+            self.doc_nombre()
             self.buttonFunctions()
 
     def choose(self, thewindow, button_set):
@@ -105,8 +108,24 @@ class LCC_Graphics:
                                       30,
                                       "{0}".format(self.doc_name_text.getText()))
         if self.clicked(self.doc_name_button):
-            doc_name = input("Title Here: ")
-            self.doc_name_text.setText("{0}".format(doc_name))
+
+            self.popup_win = Tk() #self.createWindow(100, 100)
+            self.popup_win.geometry(100 x 100 + 0 + 0)
+
+            self.popup_button = Button(self.popup_win,
+                                       Point(50, 75), 40, 30,
+                                       "Title: ")
+            self.done_button = Button(self.popup_win, Point(75, 10),
+                                      30, 20, "Done")
+            while True:
+                if self.clicked(self.popup_button):
+                    self.popup_button.setText(" ")
+                if self.clicked(self.done_button):
+                    self.popup_win.close()
+                    return
+            self.doc_name = Text("Document Title".format)
+            self.doc_name = input("Title Here: ")
+            self.doc_name_text.setText("{0}".format(self.doc_name))
 
     def appearance(self):
         """ This method draws a bunch of shapes to make the document more
@@ -123,25 +142,25 @@ class LCC_Graphics:
             Buttons are added to a list"""
         self.drawingbuttons = []
         self.drawWidthIncreaseButton = Button(self.window,
-                                              Point(100, 100),
-                                              10,
-                                              10,
+                                              Point(280, 60),
+                                              20,
+                                              20,
                                               "+")
         self.drawWidthDecreaseButton = Button(self.window,
-                                              Point(100, 100),
-                                              10,
-                                              10,
+                                              Point(310, 60),
+                                              20,
+                                              20,
                                               "-")
-        self.redButton = Button(self.window, Point(100, 60), 20, 20, "R")
-        self.redButton.setFill("red")
-        self.blueButton = Button(self.window, Point(130, 60), 20, 20, "B")
+        self.blueButton = Button(self.window, Point(130, 60), 20, 20, "")
         self.blueButton.setFill("blue")
-        self.greenButton = Button(self.window, Point(160, 60), 20, 20, "G")
+        self.greenButton = Button(self.window, Point(160, 60), 20, 20, "")
         self.greenButton.setFill("green")
-        self.orangeButton = Button(self.window, Point(190, 60), 20, 20, "O")
+        self.orangeButton = Button(self.window, Point(190, 60), 20, 20, "")
         self.orangeButton.setFill("orange")
-        self.yellowButton = Button(self.window, Point(220, 60), 20, 20, "Y")
+        self.yellowButton = Button(self.window, Point(220, 60), 20, 20, "")
         self.yellowButton.setFill("yellow")
+        self.redButton = Button(self.window, Point(250, 60), 20, 20, "")
+        self.redButton.setFill("red")
         self.drawingbuttons.append([self.drawWidthIncreaseButton,
                                     self.drawWidthDecreaseButton,
                                     self.redButton,

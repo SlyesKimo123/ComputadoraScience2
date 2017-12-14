@@ -4,9 +4,8 @@ import pyautogui
 import time
 
 class Pen:
-    def __init__(self, width, color, ):
+    def __init__(self, width):
         self.width = width
-        self.color = color
 
     def mousePos(self):
         """ Returns the coords of current mouse position """
