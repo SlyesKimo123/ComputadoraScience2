@@ -4,14 +4,18 @@
 
 # import statements
 from ButtonProgram_LukeChase import Button
-#from LCC_Programs_DRAW import Pen
-from graphicscopy import *
+from LCC_Programs_DRAW import Pen
+from graphics import *
 
 class LCC_Graphics:
     """" This class has all the methods for the drawing program """
 
     def __init__(self):
-        self.COimageICON = Image(Point(50, 50), "LCC_Icon.gif") # loads the LCC Programs logo
+        self.COimageICON = Image(Point(100, 50),
+                                 "~/Documents/Computadora Science II/"
+                                 "ComputadoraScience2/Object Oriented Programming/"
+                                 "LCC Programs/LCC_Icon.gif")
+                                # loads the LCC Programs logo
         self.pen = Pen(2, 3)
 
     def createWindow(self, x, y):
@@ -33,7 +37,7 @@ class LCC_Graphics:
         """ Creates buttons for startup window and returns them in a list """
         self.createDocButton = Button(self.window, Point(100, 100), 100, 60,
                                       "Create Document")
-        self.CANCELstartup_button = Button(self.window, Point(120, 180), 60, 30,
+        self.CANCELstartup_button = Button(self.window, Point(100, 180), 60, 30,
                                            "Cancel")
         start_up_buttonlist = []
         start_up_buttonlist.append(self.createDocButton)
@@ -55,8 +59,10 @@ class LCC_Graphics:
     def startProgram(self):
         self.createWindow(1000, 1000)
         self.window.setBackground("white")
+        self.doc_nombre()
+        self.appearance()
         self.actionButtons()
-        self.pen.draw()
+        self.pen.draw(self.window)
         while True:
             self.buttonFunctions()
 
@@ -85,24 +91,57 @@ class LCC_Graphics:
             self.closeButton()
 
     def clicked(self, button):
-        """ Returns the LABEL of the button in parameter if clicked"""
+        """ Returns the LABEL of the button in parameter if clicked """
         while True:
             p = self.window.getMouse()
-            print(p)
             if button.clicked(p):
                 return button.getLabel()
+
+    def doc_nombre(self):
+        self.doc_name_text = Text(Point(30, 60), "Title Here")
+        self.doc_name_button = Button(self.window,
+                                      Point(30, 60),
+                                      100,
+                                      30,
+                                      "{0}".format(self.doc_name_text.getText()))
+        if self.clicked(self.doc_name_button):
+            doc_name = input("Title Here: ")
+            self.doc_name_text.setText("{0}".format(doc_name))
+
+    def appearance(self):
+        """ This method draws a bunch of shapes to make the document more
+            visually appealing (I hope). """
+        self.top_banner = Rectangle(Point(0, 0), Point(1000, 40))
+        self.top_banner.setFill("blue")
+        self.top_banner.draw(self.window)
+        self.button_banner = Rectangle(Point(0, 40), Point(1000, 80))
+        self.button_banner.setFill("grey")
+        self.button_banner.draw(self.window)
 
     def actionButtons(self):
         """ Creates the buttons in the top of the document for user to click.
             Buttons are added to a list"""
         self.drawingbuttons = []
-        self.drawWidthIncreaseButton = Button(self.window, Point(100, 100), 10, 10, "+")
-        self.drawWidthDecreaseButton = Button(self.window, Point(100, 100), 10, 10, "-")
-        self.redButton = Button(self.window, Point(10, 10), 10, 10, "COLOR HERE")
-        self.blueButton = Button(self.window, Point(30, 30), 10, 10, "COLOR HERE")
-        self.greenButton = Button(self.window, Point(50, 500), 10, 10, "COLOR HERE")
-        self.orangeButton = Button(self.window, Point(100, 100), 10, 10, "COLOR HERE")
-        self.yellowButton = Button(self.window, Point(200, 200), 10, 10, "COLOR HERE")
+        self.drawWidthIncreaseButton = Button(self.window,
+                                              Point(100, 100),
+                                              10,
+                                              10,
+                                              "+")
+        self.drawWidthDecreaseButton = Button(self.window,
+                                              Point(100, 100),
+                                              10,
+                                              10,
+                                              "-")
+        self.redButton = Button(self.window, Point(100, 60), 20, 20, "R")
+        self.redButton.setFill("red")
+        self.blueButton = Button(self.window, Point(130, 60), 20, 20, "B")
+        self.blueButton.setFill("blue")
+        self.greenButton = Button(self.window, Point(160, 60), 20, 20, "G")
+        self.greenButton.setFill("green")
+        self.orangeButton = Button(self.window, Point(190, 60), 20, 20, "O")
+        self.orangeButton.setFill("orange")
+        self.yellowButton = Button(self.window, Point(220, 60), 20, 20, "Y")
+        self.yellowButton.setFill("yellow")
         self.drawingbuttons.append([self.drawWidthIncreaseButton,
                                     self.drawWidthDecreaseButton,
                                     self.redButton,
@@ -115,8 +154,9 @@ class LCC_Graphics:
     def closeButton(self):
         """ Creates the "X" button in the top left corner of the
             window.  It closes the program when clicked """
-        self.X_button = Button(self.window, Point(20, 15), 10, 10, "X") # Creates 'X' button
-                                                                        # in top left corner
+        self.X_button = Button(self.window, Point(20, 15), 15, 15, "X")
+        # (Above) Creates 'X' button in top left corner
+        self.X_button.setFill("red")
         if self.clicked(self.X_button): # Checks if button is clicked
             self.window.close()
 

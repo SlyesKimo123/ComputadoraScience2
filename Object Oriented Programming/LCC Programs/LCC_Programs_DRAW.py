@@ -1,6 +1,7 @@
 
-from graphicscopy import *
+from graphics import *
 import pyautogui
+import time
 
 class Pen:
     def __init__(self, width, color, ):
@@ -14,23 +15,27 @@ class Pen:
 
     def mouseState(self, window):
         """ Checks to see if mouse has been clicked or not.  Returns True or False """
-#        if getMouse
-        return window.checkMouse()
+        click_pos = window.checkMouse()
+        print(click_pos)
+        return click_pos
+
+    def mouseState2(self, window):
+        if mouseState(window) == True and time > 0.1:
+            click2_pos = window.checkMouse()
+            print(click2_pos)
+            return click2_pos
 
     def pendown(self, window):
         if window.checkMouse():
             print()
 
     def draw(self, window):
-        if window.checkMouse:
-            window.Circle(Point(window.getMouse), 10, 10)
+        if self.mouseState == True:
+            p = Line(self.mouseState(window), self.mouseState2(window))
+            p.draw(window)
 
+    def line_color(self, line, el_color):
+        line.setFill(el_color)
 
-#    def line_color(self, el_color):
-#        button(from interface).
-
-#    def line_width(self, wideness):
-#        fff
-
-pen = Pen(3,2)
-pen.mousePos()
+    def line_width(self, object, wideness):
+        object.setWidth(wideness)

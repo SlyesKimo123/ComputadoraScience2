@@ -35,6 +35,9 @@ class Button:
                 self.xmin <= p.getX() <= self.xmax and
                 self.ymin <= p.getY() <= self.ymax)
 
+    def setFill(self, color):
+        self.rect.setFill(color)
+
     def getLabel(self):
         "Returns the label string of this button."
         return self.label.getText()
