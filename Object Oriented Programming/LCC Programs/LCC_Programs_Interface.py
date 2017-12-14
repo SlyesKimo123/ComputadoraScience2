@@ -98,9 +98,9 @@ class LCC_Graphics:
                 return button.getLabel()
 
     def doc_nombre(self):
-        self.doc_name_text = Text(Point(30, 60), "Title Here")
+        self.doc_name_text = Text(Point(65, 60), "Title Here")
         self.doc_name_button = Button(self.window,
-                                      Point(30, 60),
+                                      Point(65, 60),
                                       100,
                                       30,
                                       "{0}".format(self.doc_name_text.getText()))
