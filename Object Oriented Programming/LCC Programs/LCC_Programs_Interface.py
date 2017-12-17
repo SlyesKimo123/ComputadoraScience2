@@ -52,7 +52,6 @@ class LCC_Graphics:
         self.start_window = self.createWindow(200, 300)
         # (Above) calls from createWindow method to set window size
         self.start_window.setBackground("black") # sets window BG color
-
         self.icon.draw(self.start_window)
 
     def createDocumentario(self):
@@ -60,14 +59,17 @@ class LCC_Graphics:
         return ans == "Create Document"
 
     def startProgram(self):
-        self.createWindow(1000, 1000)
+        self.window = self.createWindow(1000, 1000)
         self.window.setBackground("white")
         self.appearance()
+        self.redButton(), self.yellowButton()
         self.actionButtons()
         while True:
-            self.pen.draw(self.window)
-            self.doc_nombre()
-            self.buttonFunctions()
+            self.pen.click1(self.window), self.pen.click2(self.window)
+#            self.pen.draw(self.window)
+#            self.buttonFunctions()
+#            self.doc_nombre()
+
 
     def choose(self, thewindow, button_set):
         while True:
@@ -91,7 +93,12 @@ class LCC_Graphics:
            In order to call these functions all at once, they will be
            activated in this method, which I can call when I run the program. """
         while True:
-            self.closeButton()
+            if self.clicked(self.redButton()):
+                self.pen.line_color(self.pen.draw(), "red")
+            elif self.clicked(self.closeButton()):
+                self.window.close()
+            elif self.clicked(self.yellowButton()):
+                self.pen.line_color(self.pen.draw(), "yellow")
 
     def clicked(self, button):
         """ Returns the LABEL of the button in parameter if clicked """
@@ -109,23 +116,22 @@ class LCC_Graphics:
                                       "{0}".format(self.doc_name_text.getText()))
         if self.clicked(self.doc_name_button):
 
-            self.popup_win = self.createWindow(100, 100) # Tk()
-#            self.popup_win.geometry(100 x 100 + 0 + 0)
+            self.popup_win = self.createWindow(200, 100)
 
             self.popup_button = Button(self.popup_win,
                                        Point(75, 75), 40, 30,
-                                       "Title: ")
-            self.done_button = Button(self.popup_win, Point(75, 10),
-                                      30, 20, "Done")
+                                       " ")
+            self.popup_button_text = Text(Point(75, 75), "Title: ")
+            self.done_button = Button(self.popup_win, Point(20, 30),
+                                      50, 20, "Done")
             while True:
-#                self.doc_name = Text("Document Title".format())#Tk input here))
-#                self.doc_name_text.setText("{0}".format(self.doc_name))
                 if self.clicked(self.popup_button):
-                    self.popup_button.setText(" ")
-                elif self.clicked(self.done_button):
+                    self.doc_name = input("Title Here: ")
+                    self.popup_button_text.setText("{0}".format(self.doc_name))
+                    if self.clicked(self.done_button):
+                        self.popup_win.close()
+                else:
                     self.popup_win.close()
-#            self.doc_name = input("Title Here: ")
-
 
     def appearance(self):
         """ This method draws a bunch of shapes to make the document more
@@ -157,17 +163,11 @@ class LCC_Graphics:
         self.greenButton.setFill("green")
         self.orangeButton = Button(self.window, Point(190, 60), 20, 20, "")
         self.orangeButton.setFill("orange")
-        self.yellowButton = Button(self.window, Point(220, 60), 20, 20, "")
-        self.yellowButton.setFill("yellow")
-        self.redButton = Button(self.window, Point(250, 60), 20, 20, "")
-        self.redButton.setFill("red")
         self.drawingbuttons.append([self.drawWidthIncreaseButton,
                                     self.drawWidthDecreaseButton,
-                                    self.redButton,
                                     self.blueButton,
                                     self.greenButton,
-                                    self.orangeButton,
-                                    self.yellowButton])
+                                    self.orangeButton])
         return self.drawingbuttons
 
     def closeButton(self):
@@ -176,8 +176,17 @@ class LCC_Graphics:
         self.X_button = Button(self.window, Point(20, 15), 15, 15, "X")
         # (Above) Creates 'X' button in top left corner
         self.X_button.setFill("red")
-        if self.clicked(self.X_button): # Checks if button is clicked
-            self.window.close()
+        return self.X_button
+
+    def redButton(self):
+        self.redButton = Button(self.window, Point(250, 60), 20, 20, "")
+        self.redButton.setFill("red")
+        return self.redButton
+
+    def yellowButton(self):
+        self.yellowButton = Button(self.window, Point(220, 60), 20, 20, "")
+        self.yellowButton.setFill("yellow")
+        return self.yellowButton
 
     def close(self):
         """ Closes the window when called """
