@@ -65,8 +65,7 @@ class LCC_Graphics:
         self.redButton(), self.yellowButton()
         self.actionButtons()
         while True:
-            self.pen.click1(self.window), self.pen.click2(self.window)
-#            self.pen.draw(self.window)
+            self.pen.draw(self.window)
 #            self.buttonFunctions()
 #            self.doc_nombre()
 

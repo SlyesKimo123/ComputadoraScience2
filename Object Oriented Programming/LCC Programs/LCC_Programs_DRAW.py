@@ -12,18 +12,15 @@ class Pen:
         while True:
             return pyautogui.position()
 
-    def click1(self, window):
+    def clicks(self, window):
         click1 = window.checkMouse()
-        print(click1)
-        return click1
-
-    def click2(self, window):
         click2 = window.checkMouse()
-        print(click2)
-        return click2
+        return click1, click2
+
 
     def draw(self, window):
-        p = Line(self.click1(window), Point(100, 100))
+        click1, click2 = self.clicks(window)
+        p = Line(click1, click2)
         p.draw(window)
 
     def line_color(self, line, el_color):
