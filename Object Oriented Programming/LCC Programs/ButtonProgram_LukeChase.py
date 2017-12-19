@@ -27,12 +27,10 @@ class Button:
         self.rect.draw(win)
         self.label = Text(center, label)
         self.label.draw(win)
-#        self.deactivate()
 
     def clicked(self, p):
         "Returns true if button active and p is inside"
-        return (# self.active and
-                self.xmin <= p.getX() <= self.xmax and
+        return (self.xmin <= p.getX() <= self.xmax and
                 self.ymin <= p.getY() <= self.ymax)
 
     def setFill(self, color):

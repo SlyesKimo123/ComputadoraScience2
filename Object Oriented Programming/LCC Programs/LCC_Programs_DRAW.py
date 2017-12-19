@@ -1,30 +1,36 @@
+# Luke Chase
+# Final Project --- Computer Science II
+
+# This is the DRAW program, where the pen class and methods are created.
 
 from graphics import *
 import pyautogui
-# import time
 
 class Pen:
-    def __init__(self, width):
-        self.width = width
-
-    def mousePos(self):
-        """ Returns the coords of current mouse position """
-        while True:
-            return pyautogui.position()
 
     def clicks(self, window):
-        click1 = window.checkMouse()
-        click2 = window.checkMouse()
+        """ Returns the points of the two mouse clicks.  Calls from the
+            getMouse method in graphics module """
+        click1 = window.getMouse()
+        click2 = window.getMouse()
         return click1, click2
 
-
-    def draw(self, window):
+    def draw(self, window, color):
+        """ Draws a line from mouse click 1 to mouse click 2 and
+            returns the line """
         click1, click2 = self.clicks(window)
-        p = Line(click1, click2)
-        p.draw(window)
+        line = Line(click1, click2)
+        line.setFill(color)
+        line.draw(window)
+        midpoint = line.getCenter()
+        circle = Circle(midpoint, 2)
+        circle.setFill("black")
+        circle.draw(window)
 
-    def line_color(self, line, el_color):
-        line.setFill(el_color)
+    def line_color(self, object, el_color):
+        """ Adjusts the color of the last line drawn"""
+        object.setFill(el_color)
 
     def line_width(self, object, wideness):
+        """ Adjusts the width of the last line drawn"""
         object.setWidth(wideness)

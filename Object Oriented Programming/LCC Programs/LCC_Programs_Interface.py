@@ -6,7 +6,7 @@
 from ButtonProgram_LukeChase import Button
 from LCC_Programs_DRAW import Pen
 from graphics import *
-# from tkinter import *
+import pyautogui
 
 class LCC_Graphics:
     """" This class has all the methods for the drawing program """
@@ -17,7 +17,7 @@ class LCC_Graphics:
                                  "ComputadoraScience2/Object Oriented Programming/"
                                  "LCC Programs/LCC_Icon.gif")
                                 # loads the LCC Programs logo
-        self.pen = Pen(2)
+        self.pen = Pen()
 
     def createWindow(self, x, y):
         """ Creates the window of the program and allows for parameters
@@ -62,13 +62,11 @@ class LCC_Graphics:
         self.window = self.createWindow(1000, 1000)
         self.window.setBackground("white")
         self.appearance()
-        self.redButton(), self.yellowButton()
-        self.actionButtons()
+        self.colorButtons()
         while True:
-            self.pen.draw(self.window)
+            self.pen.draw(self.window, self.color())
 #            self.buttonFunctions()
 #            self.doc_nombre()
-
 
     def choose(self, thewindow, button_set):
         while True:
@@ -77,15 +75,38 @@ class LCC_Graphics:
                 if b.clicked(p):
                     return b.getLabel()
 
-    def mousePos(self):
-        """ Returns the coords of the current mouse position """
-        self.mousePosition = self.window.getMouse()
-        return self.mousePosition
-
     def cursorPicture(self):
         """ This is the little icon that represents the cursor and makes the icon
             follow the mouse around the screen. """
-        self.penIcon = Image(self.mousePosition, "PenIcon.gif")
+        self.penIcon = Image(self.mousePos(), "PenIcon.gif")
+
+    def colorRed(self):
+        choice = self.choose(self.window, self.colorButtons())
+        return choice == "r"
+
+    def colorGreen(self):
+        choice = self.choose(self.window, self.colorButtons())
+        return choice == "g"
+
+    def colorBlue(self):
+        choice = self.choose(self.window, self.colorButtons())
+        return choice == "b"
+
+    def colorOrange(self):
+        choice = self.choose(self.window, self.colorButtons())
+        return choice == "o"
+
+    def color(self):
+        color = 'black'
+        if self.colorRed() == True:
+            color = 'red'
+        elif self.colorGreen() == True:
+            color = 'green'
+        elif self.colorBlue() == True:
+            color = 'blue'
+        elif self.colorOrange() == True:
+            color = 'orange'
+        return color
 
     def buttonFunctions(self):
         """ Each button will have their own function in a different method.
@@ -96,7 +117,7 @@ class LCC_Graphics:
                 self.pen.line_color(self.pen.draw(), "red")
             elif self.clicked(self.closeButton()):
                 self.window.close()
-            elif self.clicked(self.yellowButton()):
+            elif self.clicked(self.blackButton()):
                 self.pen.line_color(self.pen.draw(), "yellow")
 
     def clicked(self, button):
@@ -142,6 +163,11 @@ class LCC_Graphics:
         self.button_banner.setFill("grey")
         self.button_banner.draw(self.window)
 
+    def mousePos(self):
+        """ Returns the coords of current mouse position """
+        while True:
+            return pyautogui.position()
+
     def actionButtons(self):
         """ Creates the buttons in the top of the document for user to click.
             Buttons are added to a list"""
@@ -156,18 +182,29 @@ class LCC_Graphics:
                                               20,
                                               20,
                                               "-")
-        self.blueButton = Button(self.window, Point(130, 60), 20, 20, "")
-        self.blueButton.setFill("blue")
-        self.greenButton = Button(self.window, Point(160, 60), 20, 20, "")
-        self.greenButton.setFill("green")
-        self.orangeButton = Button(self.window, Point(190, 60), 20, 20, "")
-        self.orangeButton.setFill("orange")
         self.drawingbuttons.append([self.drawWidthIncreaseButton,
-                                    self.drawWidthDecreaseButton,
-                                    self.blueButton,
-                                    self.greenButton,
-                                    self.orangeButton])
+                                    self.drawWidthDecreaseButton])
         return self.drawingbuttons
+
+    def colorButtons(self):
+        """ Creates all the color buttons for the line color and adds them to a list """
+        self.redButton = Button(self.window, Point(250, 60), 20, 20, "r")
+        self.redButton.setFill("red") # Creates the red button
+        self.blackButton = Button(self.window, Point(220, 60), 20, 20, "")
+        self.blackButton.setFill("black") # Creates yellow button
+        self.blueButton = Button(self.window, Point(130, 60), 20, 20, "b")
+        self.blueButton.setFill("blue") # Creates blue button
+        self.greenButton = Button(self.window, Point(160, 60), 20, 20, "g")
+        self.greenButton.setFill("green") # Creates green button
+        self.orangeButton = Button(self.window, Point(190, 60), 20, 20, "o")
+        self.orangeButton.setFill("orange") # Creates orange button
+        self.color_buttons = []
+        self.color_buttons.append(self.redButton)
+        self.color_buttons.append(self.blackButton)
+        self.color_buttons.append(self.blueButton)
+        self.color_buttons.append(self.greenButton)
+        self.color_buttons.append(self.orangeButton)
+        return self.color_buttons
 
     def closeButton(self):
         """ Creates the "X" button in the top left corner of the
@@ -176,16 +213,6 @@ class LCC_Graphics:
         # (Above) Creates 'X' button in top left corner
         self.X_button.setFill("red")
         return self.X_button
-
-    def redButton(self):
-        self.redButton = Button(self.window, Point(250, 60), 20, 20, "")
-        self.redButton.setFill("red")
-        return self.redButton
-
-    def yellowButton(self):
-        self.yellowButton = Button(self.window, Point(220, 60), 20, 20, "")
-        self.yellowButton.setFill("yellow")
-        return self.yellowButton
 
     def close(self):
         """ Closes the window when called """
