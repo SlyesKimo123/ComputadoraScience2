@@ -55,18 +55,22 @@ class LCC_Graphics:
         self.icon.draw(self.start_window)
 
     def createDocumentario(self):
+        """ Returns True if Create Document button is clicked in the startup window"""
         ans = self.choose(self.window, self.startup_buttons())
         return ans == "Create Document"
 
     def startProgram(self):
+        """ List of actions to be completed before the user can start drawing """
         self.window = self.createWindow(1000, 1000)
         self.window.setBackground("white")
         self.appearance()
         self.colorButtons()
+        self.closeButton()
+#        self.TTT(self.window) # This is a work in progress. It almost works, but if not clicked
+                              # and unclicked it will not progress to the next action
+#        self.doc_nombre()
         while True:
-            self.pen.draw(self.window, self.color())
-#            self.buttonFunctions()
-#            self.doc_nombre()
+            self.pen.draw(self.window, self.color()) # DRAW
 
     def choose(self, thewindow, button_set):
         while True:
@@ -80,47 +84,56 @@ class LCC_Graphics:
             follow the mouse around the screen. """
         self.penIcon = Image(self.mousePos(), "PenIcon.gif")
 
-    def colorRed(self):
-        choice = self.choose(self.window, self.colorButtons())
-        return choice == "r"
-
-    def colorGreen(self):
-        choice = self.choose(self.window, self.colorButtons())
-        return choice == "g"
-
-    def colorBlue(self):
-        choice = self.choose(self.window, self.colorButtons())
-        return choice == "b"
-
-    def colorOrange(self):
-        choice = self.choose(self.window, self.colorButtons())
-        return choice == "o"
+    def colorRed(self):                                                     ##
+        choice = self.choose(self.window, self.colorButtons())              ##
+        return choice == "r"                                                ##
+                                                                            ##
+    def colorGreen(self):                                                   ###
+        choice = self.choose(self.window, self.colorButtons())              ####
+        return choice == "g"                                                #####
+                                                                            ###### These check to see if the which color buttons are selected all return True
+    def colorBlue(self):                                                    #####
+        choice = self.choose(self.window, self.colorButtons())              ###
+        return choice == "b"                                                ##
+                                                                            ##
+    def colorOrange(self):                                                  ##
+        choice = self.choose(self.window, self.colorButtons())              ##
+        return choice == "o"                                                ##
 
     def color(self):
-        color = 'black'
-        if self.colorRed() == True:
-            color = 'red'
-        elif self.colorGreen() == True:
-            color = 'green'
-        elif self.colorBlue() == True:
-            color = 'blue'
-        elif self.colorOrange() == True:
-            color = 'orange'
-        return color
-
-    def buttonFunctions(self):
-        """ Each button will have their own function in a different method.
-           In order to call these functions all at once, they will be
-           activated in this method, which I can call when I run the program. """
+        """ Checks to see which button returned True and sets the color of the line to that color.
+            It returns this color """
         while True:
-            if self.clicked(self.redButton()):
-                self.pen.line_color(self.pen.draw(), "red")
-            elif self.clicked(self.closeButton()):
-                self.window.close()
-            elif self.clicked(self.blackButton()):
-                self.pen.line_color(self.pen.draw(), "yellow")
+            color = 'black'
+            if self.colorRed() == True:
+                color = 'red'
+            elif self.colorGreen() == True:
+                color = 'green'
+            elif self.colorBlue() == True:
+                color = 'blue'
+            elif self.colorOrange() == True:
+                color = 'orange'
+            return color
 
-    def clicked(self, button):
+    def TTT(self, window):
+        """ Work-in-progress TIC-TAC-TOE board for users to click on when they want (button to turn it on in the button panel) """
+        TTTButton = Button(window, Point(500, 60), 100, 40, "Tic-tac-toe")
+        v1 = Line(Point(100, 400), Point(100, 700))
+        v2 = Line(Point(700, 400), Point(700, 700))
+        h1 = Line(Point(250, 600), Point(550, 600))
+        h2 = Line(Point(250, 500), Point(550, 500))
+        if self.clycked(TTTButton):
+            v1.draw(window)
+            v2.draw(window)
+            h1.draw(window)
+            h2.draw(window)
+        if self.clycked(TTTButton):
+            v1.undraw()
+            v2.undraw()
+            h1.undraw()
+            h2.undraw()
+
+    def clycked(self, button):
         """ Returns the LABEL of the button in parameter if clicked """
         while True:
             p = self.window.getMouse()
@@ -128,30 +141,18 @@ class LCC_Graphics:
                 return button.getLabel()
 
     def doc_nombre(self):
+        """ Another work-in-progress to allow the user to name the doc.  Right now all it does is ask for the user input on click of the button """
         self.doc_name_text = Text(Point(65, 60), "Title Here")
         self.doc_name_button = Button(self.window,
                                       Point(65, 60),
                                       100,
                                       30,
                                       "{0}".format(self.doc_name_text.getText()))
-        if self.clicked(self.doc_name_button):
+        if self.clycked(self.doc_name_button):
+            self.doc_name = input("Title Here: ")
+            print("this works")
+            self.doc_name_text.setText("{0}".format(self.doc_name))
 
-            self.popup_win = self.createWindow(200, 100)
-
-            self.popup_button = Button(self.popup_win,
-                                       Point(75, 75), 40, 30,
-                                       " ")
-            self.popup_button_text = Text(Point(75, 75), "Title: ")
-            self.done_button = Button(self.popup_win, Point(20, 30),
-                                      50, 20, "Done")
-            while True:
-                if self.clicked(self.popup_button):
-                    self.doc_name = input("Title Here: ")
-                    self.popup_button_text.setText("{0}".format(self.doc_name))
-                    if self.clicked(self.done_button):
-                        self.popup_win.close()
-                else:
-                    self.popup_win.close()
 
     def appearance(self):
         """ This method draws a bunch of shapes to make the document more

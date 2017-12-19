@@ -4,7 +4,6 @@
 # This is the DRAW program, where the pen class and methods are created.
 
 from graphics import *
-import pyautogui
 
 class Pen:
 
@@ -20,16 +19,12 @@ class Pen:
             returns the line """
         click1, click2 = self.clicks(window)
         line = Line(click1, click2)
-        line.setFill(color)
         line.draw(window)
+        line.setFill(color)
         midpoint = line.getCenter()
         circle = Circle(midpoint, 2)
         circle.setFill("black")
         circle.draw(window)
-
-    def line_color(self, object, el_color):
-        """ Adjusts the color of the last line drawn"""
-        object.setFill(el_color)
 
     def line_width(self, object, wideness):
         """ Adjusts the width of the last line drawn"""
